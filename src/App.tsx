@@ -14,8 +14,7 @@ import {
   Fab,
   useTheme,
   useMediaQuery,
-  Card,
-  CardContent
+  Card
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -28,37 +27,6 @@ import { UserForm } from './components/UserForm';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import type { User, UserFormData } from "./types/User";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// Custom theme for the app
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#00796b', // Dark teal for main buttons and highlights
-    },
-    secondary: {
-      main: '#ff5722', // Bright accent color
-    },
-    background: {
-      default: '#f4f4f4', // Light gray background
-    },
-    text: {
-      primary: '#333',
-      secondary: '#555',
-    },
-  },
-  typography: {
-    fontFamily: '"Roboto", sans-serif',
-    h1: {
-      fontWeight: 700,
-    },
-    h2: {
-      fontWeight: 600,
-    },
-    body1: {
-      lineHeight: 1.6,
-    },
-  },
-});
 
 const App: React.FC = () => {
   const { users, loading, addUser, updateUser, deleteUser } = useUsers();
