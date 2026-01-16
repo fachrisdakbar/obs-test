@@ -71,3 +71,23 @@ export default defineConfig([
   },
 ])
 ```
+
+//You can run go to this website :
+
+https://obs-test-new.vercel.app/
+
+This the github :
+
+https://github.com/fachrisdakbar/obs-test
+
+1. Clone from the github.
+2. Run npm install.
+3. If you wanna run di local just run this command :
+
+npm run dev
+
+4. If you wanna run testing in local computer, run this command :
+
+npm run test
+
+5. Done
