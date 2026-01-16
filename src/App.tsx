@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Container,
-  Grid,
+  Grid2,
   Typography,
   Button,
   Dialog,
@@ -114,9 +114,9 @@ const App: React.FC = () => {
           )}
         </Box>
 
-        <Grid container spacing={3} justifyContent="center">
+        <Grid2 container spacing={3} justifyContent="center">
           {users.map((user) => (
-            <Grid item xs={12} sm={6} md={4} key={user.id}>
+            <Grid2 xs={12} sm={6} md={4} key={user.id}>
               <Card
                 sx={{
                   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
@@ -128,9 +128,9 @@ const App: React.FC = () => {
               >
                 <UserCard user={user} onViewDetails={() => handleViewDetails(user)} />
               </Card>
-            </Grid>
+            </Grid2>
           ))}
-        </Grid>
+        </Grid2>
 
         {users.length === 0 && (
           <Box sx={{ textAlign: 'center', mt: 8 }}>
