@@ -26,7 +26,7 @@ import { UserDetails } from './components/UserDetails';
 import { UserForm } from './components/UserForm';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import type { User, UserFormData } from "./types/User";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 const App: React.FC = () => {
   const { users, loading, addUser, updateUser, deleteUser } = useUsers();
