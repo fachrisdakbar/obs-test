@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Container,
-  Grid2,
   Typography,
   Button,
+  Grid,
   Dialog,
   DialogTitle,
   IconButton,
@@ -14,33 +14,30 @@ import {
   Fab,
   useTheme,
   useMediaQuery,
-  Card
-} from '@mui/material';
-import {
-  Add as AddIcon,
-  Close as CloseIcon
-} from '@mui/icons-material';
-import { useUsers } from './context/UserContext';
-import { UserCard } from './components/UserCard';
-import { UserDetails } from './components/UserDetails';
-import { UserForm } from './components/UserForm';
-import { ConfirmDialog } from './components/ConfirmDialog';
+  Card,
+} from "@mui/material";
+import { Add as AddIcon, Close as CloseIcon } from "@mui/icons-material";
+import { useUsers } from "./context/UserContext";
+import { UserCard } from "./components/UserCard";
+import { UserDetails } from "./components/UserDetails";
+import { UserForm } from "./components/UserForm";
+import { ConfirmDialog } from "./components/ConfirmDialog";
 import type { User, UserFormData } from "./types/User";
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from "@mui/material/styles";
 
 const App: React.FC = () => {
   const { users, loading, addUser, updateUser, deleteUser } = useUsers();
-  
+
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<number | null>(null);
-  const [snackbar, setSnackbar] = useState({ open: false, message: '' });
+  const [snackbar, setSnackbar] = useState({ open: false, message: "" });
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleViewDetails = (user: User) => {
     setSelectedUser(user);
@@ -67,7 +64,7 @@ const App: React.FC = () => {
   const handleConfirmDelete = () => {
     if (userToDelete) {
       deleteUser(userToDelete);
-      setSnackbar({ open: true, message: 'User deleted successfully!' });
+      setSnackbar({ open: true, message: "User deleted successfully!" });
     }
     setConfirmOpen(false);
     setUserToDelete(null);
@@ -76,10 +73,10 @@ const App: React.FC = () => {
   const handleFormSubmit = (data: UserFormData) => {
     if (editingUser) {
       updateUser(editingUser.id, data);
-      setSnackbar({ open: true, message: 'User updated successfully!' });
+      setSnackbar({ open: true, message: "User updated successfully!" });
     } else {
       addUser(data);
-      setSnackbar({ open: true, message: 'User added successfully!' });
+      setSnackbar({ open: true, message: "User added successfully!" });
     }
     setFormOpen(false);
     setEditingUser(null);
@@ -87,7 +84,14 @@ const App: React.FC = () => {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
         <CircularProgress size={60} />
       </Box>
     );
@@ -96,9 +100,21 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant={isMobile ? 'h5' : 'h3'} fontWeight="bold" color="primary" sx={{ mb: 2 }}>
-           OBS Test 
+        <Box
+          sx={{
+            mb: 4,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant={isMobile ? "h5" : "h3"}
+            fontWeight="bold"
+            color="primary"
+            sx={{ mb: 2 }}
+          >
+            OBS Test
           </Typography>
           {!isMobile && (
             <Button
@@ -107,33 +123,52 @@ const App: React.FC = () => {
               startIcon={<AddIcon />}
               onClick={handleAddUser}
               size="large"
-              sx={{ borderRadius: '30px' }}
+              sx={{ borderRadius: "30px" }}
             >
               Add User
             </Button>
           )}
         </Box>
 
-        <Grid2 container spacing={3} justifyContent="center">
+        <Grid container spacing={3} justifyContent="center">
           {users.map((user) => (
-            <Grid2 xs={12} sm={6} md={4} key={user.id}>
+            <Grid
+              key={user.id}
+              sx={{
+                flexBasis: {
+                  xs: "100%",
+                  sm: "50%",
+                  md: "33.333%",
+                },
+                maxWidth: {
+                  xs: "100%",
+                  sm: "50%",
+                  md: "33.333%",
+                },
+              }}
+            >
               <Card
                 sx={{
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+                  p: 2,
+                  height: "100%",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    transform: "scale(1.05)",
+                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
                   },
                 }}
               >
-                <UserCard user={user} onViewDetails={() => handleViewDetails(user)} />
+                <UserCard
+                  user={user}
+                  onViewDetails={() => handleViewDetails(user)}
+                />
               </Card>
-            </Grid2>
+            </Grid>
           ))}
-        </Grid2>
+        </Grid>
 
         {users.length === 0 && (
-          <Box sx={{ textAlign: 'center', mt: 8 }}>
+          <Box sx={{ textAlign: "center", mt: 8 }}>
             <Typography variant="h6" color="text.secondary">
               No users found. Add your first user!
             </Typography>
@@ -141,7 +176,11 @@ const App: React.FC = () => {
         )}
 
         {isMobile && (
-          <Fab color="secondary" sx={{ position: 'fixed', bottom: 16, right: 16 }} onClick={handleAddUser}>
+          <Fab
+            color="secondary"
+            sx={{ position: "fixed", bottom: 16, right: 16 }}
+            onClick={handleAddUser}
+          >
             <AddIcon />
           </Fab>
         )}
@@ -156,14 +195,26 @@ const App: React.FC = () => {
           />
         )}
 
-        <Dialog open={formOpen} onClose={() => setFormOpen(false)} maxWidth="sm" fullWidth>
+        <Dialog
+          open={formOpen}
+          onClose={() => setFormOpen(false)}
+          maxWidth="sm"
+          fullWidth
+        >
           <DialogTitle>
-            {editingUser ? 'Edit User' : 'Add New User'}
-            <IconButton onClick={() => setFormOpen(false)} sx={{ position: 'absolute', right: 8, top: 8 }}>
+            {editingUser ? "Edit User" : "Add New User"}
+            <IconButton
+              onClick={() => setFormOpen(false)}
+              sx={{ position: "absolute", right: 8, top: 8 }}
+            >
               <CloseIcon />
             </IconButton>
           </DialogTitle>
-          <UserForm user={editingUser} onSubmit={handleFormSubmit} onClose={() => setFormOpen(false)} />
+          <UserForm
+            user={editingUser}
+            onSubmit={handleFormSubmit}
+            onClose={() => setFormOpen(false)}
+          />
         </Dialog>
 
         <ConfirmDialog
@@ -179,7 +230,10 @@ const App: React.FC = () => {
           autoHideDuration={3000}
           onClose={() => setSnackbar({ ...snackbar, open: false })}
         >
-          <Alert severity="success" sx={{ backgroundColor: '#4caf50', color: '#fff' }}>
+          <Alert
+            severity="success"
+            sx={{ backgroundColor: "#4caf50", color: "#fff" }}
+          >
             {snackbar.message}
           </Alert>
         </Snackbar>
