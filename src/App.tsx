@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Container,
-  Grid2 as Grid,
+  Grid,
   Typography,
   Button,
   Dialog,
